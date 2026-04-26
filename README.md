@@ -43,10 +43,18 @@ Enable Poll SCM
 
 Paste:
 
-docker rm -f ci-container 2>nul
+type index.html
 findstr "Hello DevOps" index.html
-docker build -t ci-demo-app .
-docker run -d -p 8080:80 --name ci-container ci-demo-app
+echo Building Docker Image...
+docker build -t cd-demo .
+
+echo Stopping old container...
+docker stop cd-container
+docker rm cd-container
+
+echo Running new container...
+docker run -d -p 8080:80 --name cd-container cd-demo
+
  STEP 7: Start Docker
 
  Open Docker Desktop
